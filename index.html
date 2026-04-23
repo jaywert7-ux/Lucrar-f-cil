@@ -23,9 +23,22 @@ button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:10px;ba
 .highlight{color:#22c55e;font-size:18px;}
 .danger{background:#dc2626;}
 
-/* popup */
 #cookiePopup{
-position:fixed;bottom:0;width:100%;background:#020617;padding:15px;text-align:center;display:none;
+position:fixed;
+bottom:20px;
+left:10px;
+right:10px;
+background:#020617;
+padding:15px;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,0.5);
+text-align:center;
+display:none;
+}
+#cookiePopup button{
+margin-top:10px;
+width:auto;
+padding:10px 20px;
 }
 </style>
 </head>
@@ -65,20 +78,20 @@ position:fixed;bottom:0;width:100%;background:#020617;padding:15px;text-align:ce
 
 <div id="sobre" class="section">
 <h2>Sobre</h2>
-<p>O Lucro Fácil PRO foi criado com o objetivo de ajudar empreendedores, vendedores e pequenas empresas a controlar melhor os seus lucros, evitar prejuízos e crescer financeiramente. O aplicativo permite calcular ganhos de forma rápida, guardar histórico e tomar decisões mais inteligentes no negócio.</p>
+<p>O Lucro Fácil PRO foi criado com o objetivo de ajudar empreendedores e empresas a controlar melhor os seus lucros, reduzir perdas e tomar decisões financeiras inteligentes. A ferramenta permite calcular ganhos, acompanhar histórico e melhorar a gestão do dinheiro no dia a dia.</p>
 </div>
 
 <div id="contacto" class="section">
 <h2>Contacto</h2>
-<p>Email: receitas715@gmail.com</p>
+<p>Email: receitas 715@gmail.com</p>
 
 <div id="privacidade" class="section">
 <h2>Política de Privacidade</h2>
-<p>Este site utiliza cookies para melhorar a experiência do utilizador. Utilizamos serviços como Google AdSense para apresentar anúncios relevantes. Ao continuar a usar o site, você concorda com a utilização de cookies.</p>
+<p>Utilizamos cookies para melhorar sua experiência e exibir anúncios relevantes através do Google AdSense.</p>
 </div>
 
 <div id="cookiePopup">
-<p>Este site usa cookies para melhorar sua experiência.</p>
+<p>Usamos cookies para melhorar sua experiência e mostrar anúncios personalizados.</p>
 <button onclick="aceitarCookies()">Aceitar</button>
 </div>
 
@@ -114,25 +127,36 @@ function renderHistorico(){
 
 function limparHistorico(){if(confirm('Apagar histórico?')){historico=[];salvar();renderHistorico();}}
 
-// cookies
-if(!localStorage.getItem('cookies')){
- document.getElementById('cookiePopup').style.display='block';
+// popup sempre aparece na primeira visita
+if(!localStorage.getItem('cookiesAceito')){
+ setTimeout(()=>{
+  document.getElementById('cookiePopup').style.display='block';
+ },1000);
 }
+
 function aceitarCookies(){
- localStorage.setItem('cookies',true);
+ localStorage.setItem('cookiesAceito',true);
  document.getElementById('cookiePopup').style.display='none';
 }
 
-// gerar 40 artigos automaticamente
+// imagens mais profissionais por categoria
 let container=document.getElementById('artigos');
-let temas=["Vendas","Economia","Poupança","Gestão de dinheiro","Negócios"];
+let imagens=[
+'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=500&fit=crop&auto=format&q=80',
+'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&auto=format&q=80',
+'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&h=500&fit=crop&auto=format&q=80',
+'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=500&fit=crop&auto=format&q=80',
+'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=500&fit=crop&auto=format&q=80'
+];
+
 for(let i=1;i<=40;i++){
- let tema=temas[i%temas.length];
+ let img=imagens[i%imagens.length];
  let div=document.createElement('div');
  div.className='article';
- div.innerHTML=`<img src='https://picsum.photos/600/400?random=${i}'>
- <h3>${tema} ${i}</h3>
- <p>Dicas práticas sobre ${tema.toLowerCase()} para melhorar resultados financeiros, evitar prejuízos e aumentar lucros no seu negócio.</p>`;
+ div.innerHTML=`
+ <img src="${img}" alt="negócios">
+ <h3>Artigo ${i}</h3>
+ <p>Dicas práticas para melhorar resultados financeiros, aumentar vendas e gerir melhor o dinheiro no seu negócio.</p>`;
  container.appendChild(div);
 }
 
