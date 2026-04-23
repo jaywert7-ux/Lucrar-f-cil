@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucro Fácil</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#0f172a;
+    color:#fff;
+}
+
+.screen{
+    display:none;
+    padding:20px;
+}
+
+.active{
+    display:block;
+}
+
+h1{
+    text-align:center;
+    color:#22c55e;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:6px 0;
+    border-radius:10px;
+    border:none;
+    background:#1f2937;
+    color:#fff;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:#fff;
+    font-size:16px;
+}
+
+.result-box{
+    background:#020617;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display:flex;
+    background:#111827;
+}
+
+.nav button{
+    flex:1;
+    background:none;
+}
+
+.highlight{
+    color:#22c55e;
+    font-size:22px;
+}
+
+/* botão perigo */
+.danger{
+    background:#dc2626;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CALCULAR -->
+<div id="calcular" class="screen active">
+    <h1>💰 Calcular Lucro</h1>
+
+    <input id="compra" placeholder="Preço de compra">
+    <input id="transporte" placeholder="Transporte">
+    <input id="embalagem" placeholder="Embalagem">
+    <input id="taxas" placeholder="Taxas">
+    <input id="outros" placeholder="Outros custos">
+    <input id="venda" placeholder="Preço de venda">
+    <input id="quantidade" placeholder="Quantidade">
+
+    <button onclick="calcular()">Calcular</button>
+</div>
+
+<!-- RESULTADO -->
+<div id="resultado" class="screen">
+    <h1>📊 Resultado</h1>
+
+    <div class="result-box">
+        <p>Lucro Total:</p>
+        <p class="highlight" id="lucroTotal"></p>
+
+        <p>Lucro por unidade: <span id="lucroUnidade"></span></p>
+        <p>Margem: <span id="margem"></span></p>
+    </div>
+
+    <button onclick="mudarTela('calcular')">Novo cálculo</button>
+</div>
+
+<!-- HISTÓRICO -->
+<div id="historico" class="screen">
+    <h1>📜 Histórico</h1>
+
+    <div id="listaHistorico"></div>
+
+    <button class="danger" onclick="limparHistorico()">🗑 Limpar histórico</button>
+</div>
+
+<!-- MENU -->
+<div class="nav">
+    <button onclick="mudarTela('calcular')">Calcular</button>
+    <button onclick="mudarTela('historico')">Histórico</button>
+</div>
+
+<script>
+let historico = [];
+
+function formatarKz(valor){
+    return valor.toLocaleString("pt-AO") + " Kz";
+}
+
+function mudarTela(tela){
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(tela).classList.add("active");
+}
+
+function calcular(){
+
+    let compra = +document.getElementById("compra").value || 0;
+    let transporte = +document.getElementById("transporte").value || 0;
+    let embalagem = +document.getElementById("embalagem").value || 0;
+    let taxas = +document.getElementById("taxas").value || 0;
+    let outros = +document.getElementById("outros").value || 0;
+    let venda = +document.getElementById("venda").value || 0;
+    let quantidade = +document.getElementById("quantidade").value || 1;
+
+    let custoUnit = compra + transporte + embalagem + taxas + outros;
+    let lucro = (venda - custoUnit) * quantidade;
+    let lucroUnidade = venda - custoUnit;
+    let margem = (lucro / (venda * quantidade)) * 100;
+
+    document.getElementById("lucroTotal").innerText = formatarKz(lucro);
+    document.getElementById("lucroUnidade").innerText = formatarKz(lucroUnidade);
+    document.getElementById("margem").innerText = margem.toFixed(1) + "%";
+
+    historico.push({
+        lucro: lucro,
+        venda: venda,
+        qtd: quantidade
+    });
+
+    atualizarHistorico();
+
+    mudarTela("resultado");
+}
+
+function atualizarHistorico(){
+    let lista = document.getElementById("listaHistorico");
+    lista.innerHTML = "";
+
+    historico.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "result-box";
+        div.innerHTML = `
+            <p>Lucro: <b>${formatarKz(item.lucro)}</b></p>
+            <p>Venda: ${formatarKz(item.venda)} | Qtd: ${item.qtd}</p>
+        `;
+        lista.appendChild(div);
+    });
+}
+
+function limparHistorico(){
+    if(confirm("Tens certeza que queres apagar todo o histórico?")){
+        historico = [];
+        atualizarHistorico();
+    }
+}
+</script>
+
+</body>
+</html>
