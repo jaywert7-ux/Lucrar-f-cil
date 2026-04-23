@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucro Fácil - Profissional</title>
+<title>Lucro Fácil PRO</title>
 
-<!-- Adsense (substituir pelo teu ID) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"></script>
 
 <style>
@@ -17,12 +16,17 @@ nav button{background:none;border:none;color:#fff;font-size:14px;}
 .active{display:block;}
 input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;background:#1f2937;color:#fff;}
 button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:10px;background:#22c55e;color:#fff;}
-.result, .box{background:#020617;padding:15px;border-radius:10px;margin-top:10px;}
+.result,.box{background:#020617;padding:15px;border-radius:10px;margin-top:10px;}
 .article{margin-bottom:20px;background:#020617;padding:15px;border-radius:10px;}
 .article img{width:100%;border-radius:10px;margin-bottom:10px;}
 .footer{text-align:center;padding:20px;font-size:12px;color:#aaa;}
 .highlight{color:#22c55e;font-size:18px;}
 .danger{background:#dc2626;}
+
+/* popup */
+#cookiePopup{
+position:fixed;bottom:0;width:100%;background:#020617;padding:15px;text-align:center;display:none;
+}
 </style>
 </head>
 
@@ -35,9 +39,9 @@ button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:10px;ba
 <button onclick="mostrar('blog')">Blog</button>
 <button onclick="mostrar('sobre')">Sobre</button>
 <button onclick="mostrar('contacto')">Contacto</button>
+<button onclick="mostrar('privacidade')">Privacidade</button>
 </nav>
 
-<!-- HOME -->
 <div id="home" class="section active">
 <h2>Calcular Lucro</h2>
 <input id="compra" placeholder="Preço de compra">
@@ -45,83 +49,46 @@ button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:10px;ba
 <input id="venda" placeholder="Preço de venda">
 <input id="qtd" placeholder="Quantidade">
 <button onclick="calc()">Calcular</button>
-
-<div class="result">
-<p class="highlight" id="res"></p>
+<div class="result"><p class="highlight" id="res"></p></div>
 </div>
 
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- HISTÓRICO -->
 <div id="historico" class="section">
 <h2>Histórico</h2>
 <div id="lista"></div>
 <button class="danger" onclick="limparHistorico()">🗑 Limpar histórico</button>
 </div>
 
-<!-- BLOG -->
 <div id="blog" class="section">
 <h2>Blog</h2>
-
-<div class="article">
-<img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f" alt="lucro">
-<h3>Como calcular lucro corretamente</h3>
-<p>Calcular lucro corretamente evita prejuízos. Some todos os custos e compare com o preço de venda.</p>
+<div id="artigos"></div>
 </div>
 
-<div class="article">
-<img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="negócio">
-<h3>5 erros que fazem perder dinheiro</h3>
-<p>Não controlar custos e vender barato são erros comuns que reduzem o lucro.</p>
-</div>
-
-<div class="article">
-<img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e" alt="vendas">
-<h3>Como vender mais em Angola</h3>
-<p>Use redes sociais, promoções e bom atendimento para aumentar vendas.</p>
-</div>
-
-<div class="article">
-<img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44" alt="economia">
-<h3>Noções básicas de economia</h3>
-<p>Entender custos, receitas e lucro é essencial para crescer financeiramente.</p>
-</div>
-
-</div>
-
-<!-- SOBRE -->
 <div id="sobre" class="section">
 <h2>Sobre</h2>
-<p>O Lucro Fácil PRO foi criado para ajudar empreendedores a controlar lucros e crescer nos negócios.</p>
+<p>O Lucro Fácil PRO foi criado com o objetivo de ajudar empreendedores, vendedores e pequenas empresas a controlar melhor os seus lucros, evitar prejuízos e crescer financeiramente. O aplicativo permite calcular ganhos de forma rápida, guardar histórico e tomar decisões mais inteligentes no negócio.</p>
 </div>
 
-<!-- CONTACTO -->
 <div id="contacto" class="section">
 <h2>Contacto</h2>
 <p>Email: receitas715@gmail.com</p>
 
-
-<!-- PRIVACIDADE -->
-<div class="section" id="privacidade">
+<div id="privacidade" class="section">
 <h2>Política de Privacidade</h2>
-<p>Este site usa cookies e Google AdSense para mostrar anúncios relevantes.</p>
+<p>Este site utiliza cookies para melhorar a experiência do utilizador. Utilizamos serviços como Google AdSense para apresentar anúncios relevantes. Ao continuar a usar o site, você concorda com a utilização de cookies.</p>
+</div>
+
+<div id="cookiePopup">
+<p>Este site usa cookies para melhorar sua experiência.</p>
+<button onclick="aceitarCookies()">Aceitar</button>
 </div>
 
 <div class="footer">© 2026 Lucro Fácil PRO</div>
 
 <script>
-function mostrar(sec){
- document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
- document.getElementById(sec).classList.add('active');
-}
+function mostrar(sec){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(sec).classList.add('active');}
 
 let historico = JSON.parse(localStorage.getItem('historico')) || [];
-
-function salvar(){
- localStorage.setItem('historico', JSON.stringify(historico));
-}
+function salvar(){localStorage.setItem('historico', JSON.stringify(historico));}
 
 function calc(){
  let compra=+document.getElementById('compra').value||0;
@@ -130,15 +97,13 @@ function calc(){
  let qtd=+document.getElementById('qtd').value||1;
  let lucro=(venda-(compra+custos))*qtd;
  document.getElementById('res').innerText='Lucro: '+lucro.toLocaleString('pt-AO')+' Kz';
-
  historico.push({lucro,venda,qtd});
  salvar();
  renderHistorico();
 }
 
 function renderHistorico(){
- let lista=document.getElementById('lista');
- lista.innerHTML='';
+ let lista=document.getElementById('lista');lista.innerHTML='';
  historico.forEach(item=>{
   let div=document.createElement('div');
   div.className='box';
@@ -147,12 +112,28 @@ function renderHistorico(){
  });
 }
 
-function limparHistorico(){
- if(confirm('Apagar histórico?')){
-  historico=[];
-  salvar();
-  renderHistorico();
- }
+function limparHistorico(){if(confirm('Apagar histórico?')){historico=[];salvar();renderHistorico();}}
+
+// cookies
+if(!localStorage.getItem('cookies')){
+ document.getElementById('cookiePopup').style.display='block';
+}
+function aceitarCookies(){
+ localStorage.setItem('cookies',true);
+ document.getElementById('cookiePopup').style.display='none';
+}
+
+// gerar 40 artigos automaticamente
+let container=document.getElementById('artigos');
+let temas=["Vendas","Economia","Poupança","Gestão de dinheiro","Negócios"];
+for(let i=1;i<=40;i++){
+ let tema=temas[i%temas.length];
+ let div=document.createElement('div');
+ div.className='article';
+ div.innerHTML=`<img src='https://picsum.photos/600/400?random=${i}'>
+ <h3>${tema} ${i}</h3>
+ <p>Dicas práticas sobre ${tema.toLowerCase()} para melhorar resultados financeiros, evitar prejuízos e aumentar lucros no seu negócio.</p>`;
+ container.appendChild(div);
 }
 
 renderHistorico();
