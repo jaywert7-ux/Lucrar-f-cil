@@ -3,195 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucro Fácil PRO</title>
+<title>Global News PRO</title>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"></script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
 
 <style>
-body{font-family:Arial;margin:0;background:#0f172a;color:#fff;}
-header{background:#111827;padding:15px;text-align:center;font-size:22px;color:#22c55e;}
-nav{display:flex;justify-content:space-around;background:#020617;padding:10px;flex-wrap:wrap;}
-nav button{background:none;border:none;color:#fff;font-size:14px;}
-.section{display:none;padding:20px;}
-.active{display:block;}
-input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;background:#1f2937;color:#fff;}
-button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:10px;background:#22c55e;color:#fff;}
-.result,.box{background:#020617;padding:15px;border-radius:10px;margin-top:10px;}
-.article{margin-bottom:20px;background:#020617;padding:15px;border-radius:10px;cursor:pointer;}
-.article img{width:100%;border-radius:10px;margin-bottom:10px;}
-.footer{text-align:center;padding:20px;font-size:12px;color:#aaa;}
-.highlight{color:#22c55e;font-size:18px;}
-.danger{background:#dc2626;}
-.tip{margin-top:10px;padding:10px;border-radius:10px;background:#111827;color:#22c55e;}
-#cookiePopup,#cookieConfig{position:fixed;bottom:20px;left:10px;right:10px;background:#020617;padding:15px;border-radius:12px;text-align:center;display:none;z-index:9999;}
-.ads{margin:15px 0;text-align:center;}
+body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
+header{background:#020617;padding:15px;display:flex;justify-content:space-between;align-items:center}
+header h1{margin:0;color:#38bdf8}
+nav a{margin:0 10px;color:#fff;text-decoration:none;cursor:pointer}
+.hero{padding:20px;background:#1e293b}
+.container{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:20px}
+.article{background:#1e293b;padding:15px;border-radius:10px;margin-bottom:15px;cursor:pointer}
+.sidebar{background:#020617;padding:15px;border-radius:10px}
+.footer{text-align:center;padding:20px;background:#020617;margin-top:20px}
+button{padding:10px;border:none;background:#38bdf8;color:#000;border-radius:5px;cursor:pointer}
+.search{padding:8px;border-radius:5px;border:none}
+.hidden{display:none}
 </style>
 </head>
-
 <body>
-<header>💰 Lucro Fácil PRO</header>
 
+<header>
+<h1>Global News PRO</h1>
 <nav>
-<button onclick="mostrar('home')">Calculadora</button>
-<button onclick="mostrar('historico')">Histórico</button>
-<button onclick="mostrar('blog')">Blog</button>
-<button onclick="mostrar('post')">Artigo</button>
-<button onclick="mostrar('sobre')">Sobre</button>
-<button onclick="mostrar('contacto')">Contacto</button>
-<button onclick="mostrar('privacidade')">Privacidade</button>
+<a onclick="filtrar('all')">Home</a>
+<a onclick="filtrar('politica')">Política</a>
+<a onclick="filtrar('economia')">Economia</a>
+<a onclick="filtrar('tech')">Tecnologia</a>
+<a onclick="filtrar('saude')">Saúde</a>
 </nav>
+<input class="search" type="text" placeholder="Pesquisar..." onkeyup="buscar(this.value)">
+</header>
 
-<div id="home" class="section active">
-<h2>Calcular Lucro</h2>
-<input id="compra" placeholder="Preço de compra">
-<input id="custos" placeholder="Outros custos">
-<input id="venda" placeholder="Preço de venda">
-<input id="qtd" placeholder="Quantidade">
-<button onclick="calc()">Calcular</button>
-
-<div class="result"><p class="highlight" id="res"></p></div>
-<div id="dica" class="tip"></div>
-
-<h3>📊 Exemplo real</h3>
-<div class="result">
-<p>Compra: 5.000</p>
-<p>Custos: 1.000</p>
-<p>Venda: 10.000</p>
-<p>Quantidade: 2</p>
-<p><b>Lucro Total: 8.000 Kz</b></p>
-</div>
+<div class="hero">
+<h2>Últimas Notícias Globais</h2>
+<p>Conteúdo atualizado para gerar tráfego e lucro.</p>
 </div>
 
-<div id="historico" class="section">
-<h2>Histórico</h2>
-<div id="lista"></div>
-<button class="danger" onclick="limparHistorico()">🗑 Limpar histórico</button>
+<!-- ANÚNCIO TOPO -->
+<div style="text-align:center;margin:20px">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<div id="blog" class="section">
-<h2>Blog</h2>
-<div id="artigos"></div>
+<div class="container">
+
+<div id="articles">
+
+<div class="article politica">
+<h3>Nova decisão política impacta economia global</h3>
+<p>Veja como isso pode afetar seu dinheiro.</p>
 </div>
 
-<div id="post" class="section">
-<h2 id="postTitle"></h2>
-<img id="postImg" style="width:100%;border-radius:10px;margin-bottom:10px;">
-
-<!-- ANÚNCIO 1 -->
-<div class="ads">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-XXXXXXXXXXXX"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+<div class="article economia">
+<h3>Como ganhar dinheiro online em 2026</h3>
+<p>Dicas práticas que estão funcionando agora.</p>
 </div>
 
-<p id="postContent"></p>
-
-<!-- ANÚNCIO 2 (meio do artigo) -->
-<div class="ads">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-XXXXXXXXXXXX"
-     data-ad-slot="2222222222"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+<div class="article tech">
+<h3>Nova tecnologia pode gerar renda extra</h3>
+<p>Descubra oportunidades com IA.</p>
 </div>
 
-<!-- ANÚNCIO 3 -->
-<div class="ads">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-XXXXXXXXXXXX"
-     data-ad-slot="3333333333"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-</div>
+<div class="article saude">
+<h3>Estratégia simples para perder peso</h3>
+<p>Método viral usado nos EUA.</p>
 </div>
 
-<div id="sobre" class="section"><h2>Sobre</h2><p>Ajuda empreendedores a calcular lucros.</p></div>
-<div id="contacto" class="section"><h2>Contacto</h2><p>receitas715@gmail.com</p></div>
-<div id="privacidade" class="section"><h2>Privacidade</h2><p>Cookies e anúncios.</p></div>
-
-<div class="footer">© 2026 Lucro Fácil PRO</div>
-
-<!-- COOKIES -->
-<div id="cookiePopup">
-<p>🍪 Aceitar e configurar cookies</p>
-<button onclick="abrirConfigAceitar()">Aceitar e configurar cookies</button>
+<!-- ANÚNCIO NO MEIO -->
+<div style="margin:20px 0;text-align:center">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="9876543210" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<div id="cookieConfig">
-<h3>Configurar cookies</h3>
-<label><input type="checkbox" checked disabled> Necessários</label><br>
-<label><input type="checkbox" id="adsCookies" checked> Anúncios</label><br>
-<label><input type="checkbox" id="statsCookies" checked> Estatísticas</label><br><br>
-<button onclick="guardarConfigFinal()">Guardar</button>
+</div>
+
+<div class="sidebar">
+<h3>🔥 Mais Lidas</h3>
+<p>Notícias virais para gerar cliques</p>
+
+<!-- ANÚNCIO LATERAL -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXX" data-ad-slot="1122334455" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+</div>
+
+</div>
+
+<div class="footer">
+<p>© 2026 Global News PRO | Política de Privacidade | Contato</p>
 </div>
 
 <script>
-function mostrar(sec){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(sec).classList.add('active');}
+function filtrar(categoria){
+let artigos=document.querySelectorAll('.article');
+artigos.forEach(a=>{
+if(categoria==='all'){a.classList.remove('hidden');}
+else{a.classList.toggle('hidden',!a.classList.contains(categoria));}
+});}
 
-let historico=JSON.parse(localStorage.getItem('historico'))||[];
-function salvar(){localStorage.setItem('historico',JSON.stringify(historico));}
-
-function calc(){
-let c=+compra.value||0, cu=+custos.value||0, v=+venda.value||0, q=+qtd.value||1;
-let lucro=(v-(c+cu))*q;
-res.innerHTML=`Lucro Total: ${lucro.toLocaleString('pt-AO')} Kz`;
-historico.push({lucro});salvar();renderHistorico();
-}
-
-function renderHistorico(){
-lista.innerHTML='';
-historico.forEach(i=>{
-let d=document.createElement('div');d.className='box';d.innerText=`Lucro: ${i.lucro.toLocaleString('pt-AO')} Kz`;
-lista.appendChild(d);
-});
-}
-
-function limparHistorico(){historico=[];salvar();renderHistorico();}
-
-const artigos=[];
-const base=[
-{t:"Como começar negócio",i:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800"},
-{t:"Erros comuns",i:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=800"},
-{t:"Como calcular lucro",i:"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800"},
-{t:"Ideias de negócio",i:"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=800"},
-{t:"Vender mais online",i:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800"}
-];
-while(artigos.length<40){artigos.push({...base[artigos.length%5]});}
-
-function renderBlog(){
-let html='';
-artigos.forEach((a,i)=>{
-html+=`<div class='article' onclick='abrirPost(${i})'><img src='${a.i}'><h3>${a.t}</h3></div>`;
-});
-document.getElementById('artigos').innerHTML=html;
-}
-
-function abrirPost(i){
-let a=artigos[i];
-postTitle.innerText=a.t;
-postImg.src=a.i;
-postContent.innerText="Conteúdo completo sobre " + a.t;
-mostrar('post');
-
-// ativa anúncios
-setTimeout(()=>{
-(adsbygoogle = window.adsbygoogle || []).push({});
-(adsbygoogle = window.adsbygoogle || []).push({});
-(adsbygoogle = window.adsbygoogle || []).push({});
-},300);
-}
-
-function abrirConfigAceitar(){cookiePopup.style.display='none';cookieConfig.style.display='block';}
-function guardarConfigFinal(){localStorage.setItem('cookiesAceito',true);cookieConfig.style.display='none';}
-
-function mostrarCookie(){if(!localStorage.getItem('cookiesAceito'))cookiePopup.style.display='block';}
-
-document.addEventListener('DOMContentLoaded',()=>{mostrarCookie();renderBlog();renderHistorico();});
+function buscar(texto){
+let artigos=document.querySelectorAll('.article');
+artigos.forEach(a=>{
+let conteudo=a.innerText.toLowerCase();
+a.classList.toggle('hidden',!conteudo.includes(texto.toLowerCase()));
+});}
 </script>
 
 </body>
